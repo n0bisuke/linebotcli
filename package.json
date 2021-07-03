@@ -1,6 +1,6 @@
 {
   "name": "linebotcli",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "",
   "main": "app.js",
   "bin": {
@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "commander": "^8.0.0"
   }
 }
