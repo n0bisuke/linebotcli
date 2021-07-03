@@ -2,14 +2,14 @@
 
 const { execFileSync} = require('child_process')
 
-//終了時にngrokをuninstall
-process.on('SIGINT',() => execFileSync('npm', ['uninstall','ngrok']));
-process.on('beforeExit', (code) => {
-    const stdout = execFileSync('npm', ['uninstall','ngrok']);
-    console.log(stdout.toString());
-});
-
 const ngrokIntall = async () => {
+    //終了時にngrokをuninstall
+    process.on('SIGINT',() => execFileSync('npm', ['uninstall','ngrok']));
+    process.on('beforeExit', (code) => {
+        const stdout = execFileSync('npm', ['uninstall','ngrok']);
+        console.log(stdout.toString());
+    });
+    
     try {
         const stdout = execFileSync('npm', ['i','ngrok']);
         // console.log('STDOUT', stdout.toString());

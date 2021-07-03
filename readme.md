@@ -21,14 +21,30 @@ $ linebotcli webhook -t <LINE BOTのアクセストークン> -u <エンドポ�
 
 ### ngrokでサーバーを起動してURLの変更
 
-```
-$ linebotcli ngrok -t <LINE BOTのアクセストークン> -h <port> -p <path>
-```
-
-- 利用例
+- 基本
 
 ```
-$ linebotcli ngrok -t xxxxxxxxxxxxxxxxx -h 5000 -p /webhook
+$ linebotcli ngrok <PORT> -t <LINE BOTのアクセストークン>
+```
+
+利用例
+
+```
+$ linebotcli ngrok 3000 -t xxxxxxxxxxxxxxxxx
+```
+
+- パス指定
+
+`--path`or`-p`でパスを指定できます。指定しないと`/webhook`になります。
+
+```
+$ linebotcli ngrok <PORT> -t <LINE BOTのアクセストークン> -p <パス>
+```
+
+利用例
+
+```
+$ linebotcli ngrok 5000 -t xxxxxxxxxxxxxxxxx -p /webhook
 ```
 
 別途ngrokを内部でインストールし、コマンド終了時にngrokをアンインストールしています。
@@ -41,3 +57,7 @@ $ linebotcli ngrok -t xxxxxxxxxxxxxxxxx -h 5000 -p /webhook
 ```
 
 ```
+
+## ライブコーディングで作ったよ
+
+https://www.youtube.com/watch?v=DjopYxdjhjU
