@@ -5,6 +5,7 @@ const program = require('commander')
 const p = require('../package.json')
 const webhook = require('./actions/webhook')
 const ngrokServer = require('./actions/ngrok')
+const botInfo = require('./actions/bot')
 
 // バージョン情報
 program
@@ -50,15 +51,13 @@ program.command('ngrok')
     })
 
 // ngrokコマンド
-program.command('hoge')
-    .description('ngrok tonnneling & Change the LINE BOT webhook URL')
-    .argument('<PORT>', 'integer argument')
+program.command('info')
+    .description('get bot info')
     .option('-t, --token <Access Token>', 'Access Token')
-    .option('-p, --path <PATH>', 'PATH')
-    .action((port, options, command) => {
-        console.log(port, options)        
+    .action(async (params, command) => {
+        const res = await botInfo(params);
+        console.log(`\n\n`,res);
     })
-
 
 // // fugaコマンド
 // program.command('fuga')

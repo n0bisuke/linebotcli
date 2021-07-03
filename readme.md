@@ -47,15 +47,16 @@ $ linebotcli ngrok <PORT> -t <LINE BOTのアクセストークン> -p <パス>
 $ linebotcli ngrok 5000 -t xxxxxxxxxxxxxxxxx -p /webhook
 ```
 
-別途ngrokを内部でインストールし、コマンド終了時にngrokをアンインストールしています。
-パッケージにngrokをインクルードすると、Node.jsがインストールされているPCやフォルダのパーミッションによってエラーが発生する場合があるのでngrokを別インストールとしています。
+`linebotcli ngrok`は、別途ngrokを内部でインストール(npx ngrokwrapper)して実行しています。
+
+パッケージにngrokをそのままインクルードすると、Node.jsがインストールされているPCやフォルダのパーミッションによってエラーが発生する場合があるのでngrokを別インストールとしています。
 
 こういった理由で、`linebotcli ngrok`のコマンドだけ利用できない環境があるかもしれません。
 
 ### LINE Botの情報を取得
 
 ```
-
+$ linebotcli info -t xxxxxxxxxxxxxxxxx
 ```
 
 ## ライブコーディングで作ったよ

@@ -1,30 +1,22 @@
 'use strict';
 
-const { execFileSync} = require('child_process')
+const { spawn } = require('child_process')
 
-const ngrokIntall = async () => {
-    //終了時にngrokをuninstall
-    process.on('SIGINT',() => execFileSync('npm', ['uninstall','ngrok']));
-    process.on('beforeExit', (code) => {
-        const stdout = execFileSync('npm', ['uninstall','ngrok']);
-        console.log(stdout.toString());
+//npx ngrokwrapperを実行
+const ngrokSpawn = (port) => {
+    return new Promise((resolve, reject) => {
+        const ngrok = spawn('npx', ['ngrokwrapper','http',port || '3000']);
+        ngrok.stdout.on('data', d => resolve(`${d}`));
+        // ngrok.stderr.on('data', d => reject(`${d}`));
     });
-    
-    try {
-        const stdout = execFileSync('npm', ['i','ngrok']);
-        // console.log('STDOUT', stdout.toString());
-        const ngrok = require(`ngrok`);
-        return ngrok;
-    } catch (error) {
-        console.log(error);
-    }
 }
 
 const main = async (params) => {
     try {
-        console.log(`Launching ngrok...`);
-        const ngrok = await ngrokIntall();
-        const url = await ngrok.connect(params.port);
+        console.log(`Launching ngrok...!!!`);
+        const resMsg = await ngrokSpawn(params.port);
+        // console.log(resMsg);
+        const url = resMsg.match(/https\:\/\/(.*?)\.ngrok\.io/)[0];
         return {
             url: url,
             port: params.port,
@@ -33,7 +25,6 @@ const main = async (params) => {
     } catch (error) {
         console.log(error);
     }
-
 }
 
 module.exports = main;
