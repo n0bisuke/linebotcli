@@ -1,6 +1,6 @@
 {
   "name": "linebotcli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "app.js",
   "bin": {
@@ -9,7 +9,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:n0bisuke/linebotcli.git"
+  },
+  "keywords": ["line","line bot","messaging api"],
   "author": "",
   "license": "ISC",
   "dependencies": {
