@@ -21,7 +21,7 @@ const main = async (params) => {
 
     try {
         const res = await axios.request(config);
-        console.log(res.data);
+        // console.log(res.data);
         // return res.data;
         return {url: WEBHOOK_URL}
     } catch (error) {

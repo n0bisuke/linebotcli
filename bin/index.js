@@ -4,6 +4,7 @@
 const program = require('commander')
 const p = require('../package.json')
 const webhook = require('./actions/webhook')
+const ngrokServer = require('./actions/ngrok')
 
 // バージョン情報
 program
@@ -14,7 +15,6 @@ program.command(`webhook`)
     .description('Change the LINE BOT webhook URL')
     .option('-t, --token <Access Token>', 'Access Token')
     .option('-u, --url <Webhook URL>', 'Webhook URL')
-    // .option('-d, --debug', 'display some debugging')
     .action((name, options, command) => {
         const params = {
             token: name.token,
@@ -23,23 +23,29 @@ program.command(`webhook`)
         return webhook(params);
     })
     .action(res => console.log(`\n Webhook URLを「${res.url}」に変更しました。`))
-    // .option('-p, --pizza-type <type>', 'flavour of pizza')
-    // .argument('<username>', 'user to login')
-    // .action(user => console.log(`hoge`,user));
-    // .action(() => webhook())
-    // .action((name, options, command) => {
-    //     const options2 = program.opts();
-    //     console.log(options2.pizzaType);
-        // if (options.debug) {
-        //     console.error('Called %s with options %o', command.name(), options);
-        //   }
-        //   const title = options.title ? `${options.title} ` : '';
-        //   console.log(`Thank-you ${title}${name}`);
-    // })
 
-// const options = program.opts();
-// console.log(options);
-// if (options.pizzaType) console.log(`- ${options.pizzaType}`);
+// ngrokコマンド
+program.command('ngrok')
+    .description('ngrok tonnneling & Change the LINE BOT webhook URL')
+    .option('-t, --token <Access Token>', 'Access Token')
+    .option('-h, --http <HTTP>', 'HTTP')
+    .option('-p, --path <PATH>', 'PATH')
+    .action(async (name, options, command) => {
+        const params = {
+            token: name.token,
+            port: name.http
+        }
+        const res = await ngrokServer(params);
+        const params2 = {
+            token: name.token,
+            url: res.url + name.path 
+        }
+        await webhook(params2);
+
+        console.log(`\n\n Forwarding ${res.url} -> http://localhost:${params.port}`);
+        console.log(`Webhook URLを「${params2.url}」に変更しました。\n トンネリングサーバーを起動...`);
+    })
+
 
 // // fugaコマンド
 // program.command('fuga')

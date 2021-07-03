@@ -1,6 +1,6 @@
 {
   "name": "linebotcli",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "main": "app.js",
   "bin": {
@@ -13,7 +13,12 @@
     "type": "git",
     "url": "git+ssh://git@github.com:n0bisuke/linebotcli.git"
   },
-  "keywords": ["line","line bot","messaging api"],
+  "keywords": [
+    "line",
+    "line bot",
+    "messaging api",
+    "ngrok"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
